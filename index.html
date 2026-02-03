@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Training Camp | Founder Athlete</title>
+
+    <link rel="icon" type="image/png" href="Imports/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #0a0a0a;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .header-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .header-logo img {
+            height: 80px;
+            width: auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(14, 135, 211, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #0e87d3;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInUp 0.8s ease-out;
+            margin-bottom: 20px;
+        }
+
+        .hero-tag i {
+            font-size: 24px;
+        }
+
+        h1 {
+            font-size: 52px;
+            line-height: 1.15;
+            margin-bottom: 30px;
+            margin-top: 10px;
+            font-weight: 900;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            letter-spacing: -1px;
+        }
+
+        h1 .highlight {
+            color: #0e87d3;
+            text-shadow: 0 0 30px rgba(14, 135, 211, 0.5);
+        }
+
+        .subtitle {
+            font-size: 22px;
+            line-height: 1.5;
+            margin-bottom: 40px;
+            color: #e0e0e0;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .date-time {
+            background: rgba(14, 135, 211, 0.1);
+            border: 2px solid #0e87d3;
+            display: inline-block;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            box-shadow: 0 0 30px rgba(14, 135, 211, 0.2);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #0e87d3 0%, #0a6ba8 100%);
+            color: white;
+            padding: 22px 60px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 40px rgba(14, 135, 211, 0.4);
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(14, 135, 211, 0.6);
+        }
+
+        .spots-limited {
+            display: block;
+            margin-top: 15px;
+            color: #888;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .section {
+            padding: 100px 20px;
+            background-color: #0f0f0f;
+        }
+
+        .section:nth-child(even) {
+            background-color: #1a1a1a;
+        }
+
+        h2 {
+            font-size: 42px;
+            margin-bottom: 60px;
+            text-align: center;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        h2 .highlight {
+            color: #0e87d3;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 30px 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(14, 135, 211, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(14, 135, 211, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            border-color: #0e87d3;
+            box-shadow: 0 15px 50px rgba(14, 135, 211, 0.3);
+        }
+
+        .benefit-card:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            color: #0e87d3;
+        }
+
+        .benefit-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: white;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+
+        .benefit-card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+            font-size: 15px;
+        }
+
+        .testimonials-section {
+            background: #0a0a0a;
+            padding: 100px 20px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 35px;
+            border-radius: 16px;
+            border: 1px solid rgba(14, 135, 211, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: #0e87d3;
+            box-shadow: 0 15px 40px rgba(14, 135, 211, 0.3);
+        }
+
+        .testimonial-text {
+            color: #e0e0e0;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0e87d3 0%, #0a6ba8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .testimonial-avatar-img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #0e87d3;
+        }
+
+        .testimonial-info h4 {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .testimonial-info p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .about-section {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 3px solid #0e87d3;
+            box-shadow: 0 15px 50px rgba(14, 135, 211, 0.3);
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-content h3 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            color: #0e87d3;
+            font-weight: 800;
+        }
+
+        .about-content p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+
+        .final-cta {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #0e87d3 0%, #0a6ba8 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .final-cta h2 {
+            color: white;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-cta p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-cta .cta-button {
+            background: white;
+            color: #0e87d3;
+            font-size: 20px;
+            padding: 24px 70px;
+        }
+
+        .final-cta .cta-button:hover {
+            background: #f0f0f0;
+        }
+
+        /* Problem Section Styles */
+        .problem-section {
+            background: #0f0f0f;
+            padding: 100px 20px;
+        }
+
+        .problem-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .problem-content h2 {
+            margin-bottom: 20px;
+        }
+
+        .problem-content p {
+            color: #b0b0b0;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .problem-content p.emphasis {
+            color: #e0e0e0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .problem-content p.conclusion {
+            color: #0e87d3;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 40px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #1a1a1a;
+            padding: 100px 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .stat-number {
+            font-size: 56px;
+            font-weight: 900;
+            color: #0e87d3;
+            text-shadow: 0 0 30px rgba(14, 135, 211, 0.5);
+        }
+
+        .stat-label {
+            color: #b0b0b0;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        /* 8-Week Build Timeline */
+        .timeline-section {
+            background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
+            padding: 60px 20px;
+        }
+
+        .timeline-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+            border-radius: 24px;
+            border: 1px solid rgba(14, 135, 211, 0.3);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .timeline-header {
+            background: linear-gradient(135deg, #0e87d3 0%, #0a6ba8 100%);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .timeline-header h2 {
+            margin-bottom: 10px;
+            font-size: 36px;
+        }
+
+        .timeline-header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 18px;
+        }
+
+        .timeline-phases {
+            padding: 30px;
+            background: linear-gradient(180deg, rgba(14, 135, 211, 0.03) 0%, transparent 50%, rgba(14, 135, 211, 0.03) 100%);
+        }
+
+        .phase-block {
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .phase-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .phase-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(14, 135, 211, 0.15);
+            border: 1px solid rgba(14, 135, 211, 0.3);
+            padding: 8px 16px;
+            border-radius: 30px;
+            margin-bottom: 15px;
+        }
+
+        .phase-number {
+            background: #0e87d3;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .phase-name {
+            color: #0e87d3;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .phase-title {
+            color: white;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 18px;
+            background: linear-gradient(90deg, #ffffff, #4da6e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .weeks-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .week-item {
+            background: linear-gradient(135deg, rgba(14, 135, 211, 0.08) 0%, rgba(14, 135, 211, 0.02) 100%);
+            border: 1px solid rgba(14, 135, 211, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .week-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #0e87d3, #4da6e0);
+        }
+
+        .week-item:hover {
+            background: linear-gradient(135deg, rgba(14, 135, 211, 0.15) 0%, rgba(14, 135, 211, 0.05) 100%);
+            border-color: rgba(14, 135, 211, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(14, 135, 211, 0.2);
+        }
+
+        .week-number {
+            color: #4da6e0;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .week-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .week-item ul {
+            list-style: none;
+        }
+
+        .week-item li {
+            color: #c0c0c0;
+            font-size: 13px;
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .week-item li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 6px;
+            height: 6px;
+            background: #4da6e0;
+            border-radius: 50%;
+        }
+
+        .phase-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(14, 135, 211, 0.3), transparent);
+            margin: 25px 0;
+        }
+
+        /* What You Get Section */
+        .get-section {
+            background: #0f0f0f;
+        }
+
+        .get-list {
+            max-width: 600px;
+            margin: 0 auto;
+            list-style: none;
+        }
+
+        .get-list li {
+            color: #e0e0e0;
+            font-size: 18px;
+            padding: 15px 0;
+            padding-left: 40px;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .get-list li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #0e87d3;
+            position: absolute;
+            left: 0;
+            font-size: 18px;
+        }
+
+        /* Bonus Section */
+        .bonus-section {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            padding: 100px 20px;
+        }
+
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            max-width: 900px;
+            margin: 0 auto 60px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid #0e87d3;
+            box-shadow: 0 0 40px rgba(14, 135, 211, 0.2);
+        }
+
+        .bonus-item {
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .bonus-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: rgba(14, 135, 211, 0.3);
+        }
+
+        .bonus-item:hover {
+            background: rgba(14, 135, 211, 0.1);
+        }
+
+        .bonus-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0e87d3 0%, #0a6ba8 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+            color: white;
+        }
+
+        .bonus-item h3 {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .bonus-item p {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .bonus-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #0e87d3;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Who This Is For - Two Columns */
+        .for-you-section {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 100px 20px;
+        }
+
+        .for-you-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .for-you-column {
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .for-you-column.not-for {
+            border-color: rgba(255, 59, 48, 0.3);
+        }
+
+        .for-you-column.is-for {
+            border-color: rgba(14, 135, 211, 0.3);
+        }
+
+        .column-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .column-header i {
+            font-size: 24px;
+        }
+
+        .not-for .column-header i {
+            color: #ff3b30;
+        }
+
+        .is-for .column-header i {
+            color: #0e87d3;
+        }
+
+        .column-header h3 {
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .for-you-list {
+            list-style: none;
+        }
+
+        .for-you-list li {
+            color: #b0b0b0;
+            font-size: 16px;
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .not-for .for-you-list li::before {
+            content: "\f00d";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #ff3b30;
+            position: absolute;
+            left: 0;
+            font-size: 16px;
+        }
+
+        .is-for .for-you-list li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #0e87d3;
+            position: absolute;
+            left: 0;
+            font-size: 16px;
+        }
+
+        /* Case Study - Sports Analytics Style */
+        .case-study-section {
+            background: #0f0f0f;
+            padding: 100px 20px;
+        }
+
+        .case-study-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .case-study-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .athlete-profile {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .athlete-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #0e87d3 0%, #0a6ba8 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .athlete-avatar-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #0e87d3;
+            box-shadow: 0 5px 20px rgba(14, 135, 211, 0.3);
+        }
+
+        .athlete-info h3 {
+            color: white;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .athlete-info p {
+            color: #0e87d3;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .case-badge {
+            background: rgba(14, 135, 211, 0.15);
+            border: 1px solid rgba(14, 135, 211, 0.3);
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: #0e87d3;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stats-dashboard {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-widget {
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-widget::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0e87d3, #4da6e0);
+        }
+
+        .stat-widget .metric {
+            font-size: 36px;
+            font-weight: 900;
+            color: #0e87d3;
+            margin-bottom: 5px;
+        }
+
+        .stat-widget .metric-label {
+            color: #888;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .chart-header h4 {
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .chart-header span {
+            color: #0e87d3;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bar-label {
+            color: #888;
+            font-size: 13px;
+            width: 60px;
+            flex-shrink: 0;
+        }
+
+        .bar-track {
+            flex: 1;
+            height: 24px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 1s ease;
+        }
+
+        .bar-fill.before {
+            background: rgba(255, 59, 48, 0.6);
+        }
+
+        .bar-fill.after {
+            background: linear-gradient(90deg, #0e87d3, #4da6e0);
+        }
+
+        .bar-value {
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            width: 45px;
+            text-align: right;
+        }
+
+        .radial-chart {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .radial-item {
+            text-align: center;
+        }
+
+        .radial-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(#0e87d3 var(--percentage), rgba(255,255,255,0.1) 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .radial-circle::before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: #1a1a1a;
+            border-radius: 50%;
+        }
+
+        .radial-circle span {
+            position: relative;
+            z-index: 1;
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .radial-label {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .case-story {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .case-story p {
+            color: #b0b0b0;
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+
+        .case-story .highlight-text {
+            color: #0e87d3;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 30px;
+        }
+
+        .transformation-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px;
+        }
+
+        .transform-item {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .transform-label {
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .transform-bar {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .transform-bar span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .before-bar {
+            background: rgba(255, 59, 48, 0.15);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            color: #ff6b6b;
+        }
+
+        .after-bar {
+            background: rgba(14, 135, 211, 0.15);
+            border: 1px solid rgba(14, 135, 211, 0.3);
+            color: #4da6e0;
+        }
+
+        .transform-arrow {
+            color: #0e87d3;
+            font-size: 24px;
+        }
+
+        .case-conclusion-text {
+            color: #e0e0e0;
+            font-size: 22px;
+            text-align: center;
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .case-conclusion-text strong {
+            color: #0e87d3;
+            font-style: normal;
+        }
+
+        /* Guarantee - Simple Copy */
+        .guarantee-section {
+            background: #1a1a1a;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .guarantee-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .guarantee-content h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .guarantee-content p {
+            color: #888;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* Single Testimonial */
+        .single-testimonial {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 80px 20px;
+        }
+
+        .single-testimonial .testimonial-card {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 85px 20px 60px 20px;
+            }
+
+            .header-logo img {
+                height: 65px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .about-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-button {
+                padding: 18px 40px;
+                font-size: 16px;
+            }
+
+            .bonus-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bonus-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .bonus-item:not(:last-child) {
+                border-bottom: 1px solid rgba(14, 135, 211, 0.2);
+            }
+
+            .for-you-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-dashboard {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .case-study-header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .athlete-profile {
+                flex-direction: column;
+            }
+
+            .weeks-row {
+                grid-template-columns: 1fr;
+            }
+
+            .transformation-visual {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .transform-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Stagger delays for grid items */
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+
+        /* Application Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0a0a0a;
+            z-index: 9999;
+        }
+
+        .modal-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .social-footer {
+            background-color: #0f0f0f;
+            padding: 50px 20px;
+            text-align: center;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer-logo {
+            margin-bottom: 30px;
+        }
+
+        .footer-logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .social-footer h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 50%;
+            color: #0e87d3;
+            font-size: 28px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(14, 135, 211, 0.2);
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, #0e87d3 0%, #0a6ba8 100%);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(14, 135, 211, 0.4);
+            border-color: #0e87d3;
+        }
+
+        .footer-links {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-links p {
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #0e87d3;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <div class="hero">
+        <div class="header-logo">
+            <img src="Imports/logo.png" alt="Founder Athlete Inc. Logo">
+        </div>
+        <div class="container">
+            <div class="hero-tag">
+                <i class="fas fa-bolt"></i>
+                Training Camp
+            </div>
+
+            <h1>Build at your best. <span class="highlight">Consistently.</span></h1>
+
+            <p class="subtitle"><strong>Training Camp</strong> is an 8-week live cohort that trains founders how to build mental and physical fitness systems that survive every business season.</p>
+
+            <div class="date-time">April 20 – June 12, 2026</div>
+            <br><br>
+
+            <a href="#" class="cta-button">Apply for Training Camp →</a>
+            <span class="spots-limited">Spots limited to 12 founders</span>
+        </div>
+    </div>
+
+    <!-- PROBLEM SECTION -->
+    <div class="problem-section">
+        <div class="container">
+            <div class="problem-content">
+                <h2 class="reveal">You know what you should be doing.<br><span class="highlight">You just can't stick to it.</span></h2>
+
+                <p>You've got a product. You've got traction. You've got people counting on you.</p>
+
+                <p>But when work gets intense, your health is the first thing out the window.</p>
+
+                <p>You skip the gym. You work through lunch. You survive on coffee and willpower.</p>
+
+                <p>By the end of the day, you're too fried to train or make a decent decision about dinner.</p>
+
+                <p>So you rot on the couch and scroll just to escape before going back to the grind.</p>
+
+                <p>You tell yourself it's temporary.</p>
+
+                <p class="emphasis">"Once this quarter ends…"<br>"Once we close this round…"<br>"Once the product launches…"</p>
+
+                <p>But the pressure never stops. And neither do you.</p>
+
+                <p><strong>Until you crash.</strong></p>
+
+                <p class="conclusion">You don't have a motivation problem.<br>You have a systems problem.</p>
+
+                <p style="color: #e0e0e0; margin-top: 20px;">You're running a company with no operating system for your own capacity.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CAPACITY CEILING SECTION -->
+    <div class="stats-section">
+        <div class="container">
+            <h2 class="reveal">The Capacity Ceiling</h2>
+            <p style="text-align: center; color: #0e87d3; font-size: 18px; margin-top: -40px; margin-bottom: 40px;">Why you can't scale past yourself</p>
+            <p style="text-align: center; color: #b0b0b0; font-size: 20px; max-width: 800px; margin: 0 auto;">The startup ecosystem invests backwards. Billions go into product and business development. Nothing goes into the human engine driving the machine. <strong style="color: white;">The founder.</strong></p>
+
+            <div class="stats-grid">
+                <div class="stat-card reveal stagger-1">
+                    <div class="stat-number">20%</div>
+                    <div class="stat-label">Drop in cognitive capacity from operating without performance infrastructure</div>
+                </div>
+                <div class="stat-card reveal stagger-2">
+                    <div class="stat-number">$1K</div>
+                    <div class="stat-label">Wasted mental energy per week</div>
+                </div>
+                <div class="stat-card reveal stagger-3">
+                    <div class="stat-number">$52K</div>
+                    <div class="stat-label">Annual cost just for working tired</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; max-width: 700px; margin: 40px auto;">
+                <p style="color: #b0b0b0; font-size: 18px; line-height: 1.8; margin-bottom: 15px;">When you hit the wall, everything stops.</p>
+                <p style="color: #b0b0b0; font-size: 18px; line-height: 1.8;">Your team loses direction. Your customers lose trust. Your company loses momentum.</p>
+                <p style="color: #ff6b6b; font-size: 20px; font-weight: 600; margin-top: 30px;">Founder burnout costs you 100% of your business.</p>
+            </div>
+
+            <p style="text-align: center; color: #e0e0e0; font-size: 22px; font-weight: 600; margin-top: 40px;">A founder can only take a company as far as they can carry it.</p>
+            <p style="text-align: center; color: #0e87d3; font-size: 24px; font-weight: 700; margin-top: 20px;">Training Camp removes the ceiling.</p>
+        </div>
+    </div>
+
+    <!-- TESTIMONIAL 1 -->
+    <div class="single-testimonial">
+        <div class="container">
+            <div class="testimonial-card reveal-scale">
+                <p class="testimonial-text">"Rey's coaching made a significant impact on my entrepreneurial journey, providing clarity and discipline when it mattered most."</p>
+                <div class="testimonial-author">
+                    <img src="Imports/Busayo.jpg" alt="Busayo" class="testimonial-avatar-img">
+                    <div class="testimonial-info">
+                        <h4>Busayo</h4>
+                        <p>Founder – Dynamite Skin Co</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="cta-button">Apply for Training Camp →</a>
+                <span class="spots-limited">Spots limited to 12 founders</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TRAINING CAMP OVERVIEW -->
+    <div class="section" style="background: #0f0f0f;">
+        <div class="container">
+            <h2>Training Camp</h2>
+            <p style="text-align: center; color: #0e87d3; font-size: 20px; margin-top: -40px; margin-bottom: 50px;">The 8-week system setup</p>
+
+            <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <p style="color: #b0b0b0; font-size: 18px; line-height: 1.8; margin-bottom: 20px;">This isn't a course. It isn't a bootcamp. It isn't a pile of PDFs.</p>
+                <p style="color: #e0e0e0; font-size: 20px; line-height: 1.8; margin-bottom: 20px;">Training Camp is a <strong style="color: white;">live guided cohort</strong> where we install performance infrastructure that survives startup intensity.</p>
+                <p style="color: #b0b0b0; font-size: 18px; line-height: 1.8; margin-bottom: 20px;">We don't teach motivation. <strong style="color: #0e87d3;">We engineer systems.</strong></p>
+                <p style="color: #e0e0e0; font-size: 20px; font-weight: 600;">By Week 8, the system runs without you needing to try.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8-WEEK BUILD TIMELINE -->
+    <div class="timeline-section">
+        <div class="container">
+            <div class="timeline-container reveal-scale">
+                <div class="timeline-header">
+                    <h2>The 8-Week Build</h2>
+                    <p>We don't teach motivation. We engineer systems.</p>
+                </div>
+
+                <div class="timeline-phases">
+                    <!-- Phase 1 -->
+                    <div class="phase-block">
+                        <div class="phase-label">
+                            <span class="phase-number">1</span>
+                            <span class="phase-name">Weeks 1–2</span>
+                        </div>
+                        <h3 class="phase-title">The Mental Operating System</h3>
+                        <div class="weeks-row">
+                            <div class="week-item">
+                                <div class="week-number">Week 1</div>
+                                <div class="week-title">Consistency</div>
+                                <ul>
+                                    <li>Build a "no matter what" minimum</li>
+                                    <li>Escape the all-or-nothing trap</li>
+                                    <li>Identity-based execution</li>
+                                </ul>
+                            </div>
+                            <div class="week-item">
+                                <div class="week-number">Week 2</div>
+                                <div class="week-title">Resilience</div>
+                                <ul>
+                                    <li>60-second stress reset</li>
+                                    <li>Faster recovery after setbacks</li>
+                                    <li>Sharper execution under pressure</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="phase-divider"></div>
+
+                    <!-- Phase 2 -->
+                    <div class="phase-block">
+                        <div class="phase-label">
+                            <span class="phase-number">2</span>
+                            <span class="phase-name">Weeks 3–5</span>
+                        </div>
+                        <h3 class="phase-title">The Biological Engine</h3>
+                        <div class="weeks-row">
+                            <div class="week-item">
+                                <div class="week-number">Week 3</div>
+                                <div class="week-title">Sleep</div>
+                                <ul>
+                                    <li>5-minute shutdown routine</li>
+                                    <li>Travel-proof sleep setup</li>
+                                    <li>Wake up ready in 15 minutes</li>
+                                </ul>
+                            </div>
+                            <div class="week-item">
+                                <div class="week-number">Week 4</div>
+                                <div class="week-title">Fuel</div>
+                                <ul>
+                                    <li>Zero-brainpower nutrition</li>
+                                    <li>Caffeine + meal timing</li>
+                                    <li>Travel fueling systems</li>
+                                </ul>
+                            </div>
+                            <div class="week-item">
+                                <div class="week-number">Week 5</div>
+                                <div class="week-title">Movement</div>
+                                <ul>
+                                    <li>15-minute energy protocol</li>
+                                    <li>Non-negotiable movement</li>
+                                    <li>Capacity-building routines</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="phase-divider"></div>
+
+                    <!-- Phase 3 -->
+                    <div class="phase-block">
+                        <div class="phase-label">
+                            <span class="phase-number">3</span>
+                            <span class="phase-name">Weeks 6–8</span>
+                        </div>
+                        <h3 class="phase-title">The High-Output Executive</h3>
+                        <div class="weeks-row">
+                            <div class="week-item">
+                                <div class="week-number">Week 6</div>
+                                <div class="week-title">Calendar</div>
+                                <ul>
+                                    <li>Deep work protection</li>
+                                    <li>Recovery blocks</li>
+                                    <li>Energy-aware meetings</li>
+                                </ul>
+                            </div>
+                            <div class="week-item">
+                                <div class="week-number">Week 7</div>
+                                <div class="week-title">Decisions</div>
+                                <ul>
+                                    <li>Save energy for leverage</li>
+                                    <li>Remove recurring friction</li>
+                                    <li>Automatic execution systems</li>
+                                </ul>
+                            </div>
+                            <div class="week-item">
+                                <div class="week-number">Week 8</div>
+                                <div class="week-title">Self-Sufficiency</div>
+                                <ul>
+                                    <li>Maintenance protocol</li>
+                                    <li>ROI measurement</li>
+                                    <li>Transition to system-led performance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TESTIMONIAL 2 -->
+    <div class="single-testimonial">
+        <div class="container">
+            <div class="testimonial-card reveal-scale">
+                <p class="testimonial-text">"Rey definitely stopped me from crashing out."</p>
+                <div class="testimonial-author">
+                    <img src="Imports/Tomi.jpg" alt="Tomi" class="testimonial-avatar-img">
+                    <div class="testimonial-info">
+                        <h4>Tomi</h4>
+                        <p>Founder – Kazo.ai</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="cta-button">Apply for Training Camp →</a>
+                <span class="spots-limited">Spots limited to 12 founders</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHAT YOU GET -->
+    <div class="section get-section">
+        <div class="container">
+            <h2 class="reveal">What You Get</h2>
+            <p style="text-align: center; color: #0e87d3; font-size: 20px; margin-top: -40px; margin-bottom: 40px;">Pro-Level Performance Infrastructure</p>
+
+            <ul class="get-list reveal">
+                <li>16 live working sessions</li>
+                <li>Complete Foundlete Method™ curriculum</li>
+                <li>Private accountability group + alumni access</li>
+                <li>Founder Performance Audit</li>
+                <li>Asynchronous support between sessions</li>
+            </ul>
+
+            <div style="margin-top: 50px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
+                <p style="color: #888; font-size: 16px; max-width: 500px; margin: 0 auto;"><strong style="color: #0e87d3;">30-Day Guarantee:</strong> Complete the first 4 weeks. If you're not satisfied, you get a full refund. No questions asked.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- BONUSES -->
+    <div class="bonus-section">
+        <div class="container">
+            <h2 class="reveal">Bonuses</h2>
+
+            <div class="bonus-grid reveal">
+                <div class="bonus-item">
+                    <span class="bonus-tag">Included</span>
+                    <div class="bonus-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3>Workout + Meal Plan Swipe Files</h3>
+                    <p>Ready-to-use templates you can implement immediately</p>
+                </div>
+                <div class="bonus-item">
+                    <span class="bonus-tag">24/7</span>
+                    <div class="bonus-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Coach Rey GPT</h3>
+                    <p>AI assistant for on-demand guidance anytime</p>
+                </div>
+                <div class="bonus-item">
+                    <span class="bonus-tag">Exclusive</span>
+                    <div class="bonus-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Travel Protocol</h3>
+                    <p>Stay consistent on the road with location-independent systems</p>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="#" class="cta-button">Apply for Training Camp →</a>
+                <span class="spots-limited">Spots limited to 12 founders</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHO THIS IS FOR - TWO COLUMNS -->
+    <div class="for-you-section">
+        <div class="container">
+            <h2 class="reveal">Who This Is For</h2>
+
+            <div class="for-you-grid">
+                <div class="for-you-column not-for reveal-left">
+                    <div class="column-header">
+                        <i class="fas fa-times-circle"></i>
+                        <h3>This is not for</h3>
+                    </div>
+                    <ul class="for-you-list">
+                        <li>Quick-fix seekers</li>
+                        <li>Passive participants</li>
+                        <li>Grind-harder believers</li>
+                    </ul>
+                </div>
+
+                <div class="for-you-column is-for reveal-right">
+                    <div class="column-header">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Founders who</h3>
+                    </div>
+                    <ul class="for-you-list">
+                        <li>Know what to do but can't stay consistent</li>
+                        <li>Are done relying on willpower</li>
+                        <li>Want systems that work under pressure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REAL RESULTS -->
+    <div class="case-study-section">
+        <div class="container">
+            <h2 class="reveal">Real Results</h2>
+
+            <div class="case-study-container">
+                <div class="case-study-header">
+                    <div class="athlete-profile">
+                        <img src="Imports/Tanika.jpg" alt="Tanika" class="athlete-avatar-img">
+                        <div class="athlete-info">
+                            <h3>Tanika</h3>
+                            <p>Founder, One Click · Acquired by Dig Insights</p>
+                        </div>
+                    </div>
+                    <div class="case-badge">
+                        <i class="fas fa-arrow-trend-up"></i> Transformation
+                    </div>
+                </div>
+
+                <!-- Story Copy -->
+                <div class="case-story">
+                    <p>After her company was acquired, Tanika hit a wall. The transition left her burned out, struggling to maintain any consistent routine. She knew what she needed to do—but couldn't make it stick.</p>
+                    <p class="highlight-text">Post-acquisition burnout → 4x/week training</p>
+                </div>
+
+                <!-- Stats Dashboard -->
+                <div class="stats-dashboard">
+                    <div class="stat-widget reveal stagger-1">
+                        <div class="metric">+200%</div>
+                        <div class="metric-label">Focus</div>
+                    </div>
+                    <div class="stat-widget reveal stagger-2">
+                        <div class="metric">9/10</div>
+                        <div class="metric-label">Sleep Quality</div>
+                    </div>
+                    <div class="stat-widget reveal stagger-3">
+                        <div class="metric">-80%</div>
+                        <div class="metric-label">Procrastination</div>
+                    </div>
+                    <div class="stat-widget reveal stagger-4">
+                        <div class="metric">4x</div>
+                        <div class="metric-label">Workouts/Week</div>
+                    </div>
+                </div>
+
+                <!-- Visual Chart -->
+                <div class="transformation-visual reveal">
+                    <div class="transform-item">
+                        <div class="transform-label">Before</div>
+                        <div class="transform-bar before-bar">
+                            <span>Burned out, inconsistent</span>
+                        </div>
+                    </div>
+                    <div class="transform-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="transform-item">
+                        <div class="transform-label">After</div>
+                        <div class="transform-bar after-bar">
+                            <span>4x/week training, sustainable systems</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="case-conclusion-text">She didn't need more information. <strong>She needed systems.</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL CTA -->
+    <div class="final-cta">
+        <div class="container">
+            <h2>Apply for Training Camp</h2>
+
+            <p>Enrollment limited to 12 founders.</p>
+
+            <a href="#" class="cta-button">Apply Now →</a>
+
+            <p style="margin-top: 30px; font-size: 16px; opacity: 0.9;">Applications close <strong>March 31, 2026</strong></p>
+        </div>
+    </div>
+
+    <!-- FOOTER: SOCIAL LINKS -->
+    <div class="social-footer">
+        <h3>Connect With Us</h3>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/reyannalambie/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.instagram.com/reylambie/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://founderathlete.co/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Website">
+                <i class="fas fa-globe"></i>
+            </a>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <p style="color: #888; margin-bottom: 10px;">Questions?</p>
+            <a href="mailto:team@founderathlete.co" style="color: #0e87d3; text-decoration: none; font-size: 16px;">team@founderathlete.co</a>
+        </div>
+
+        <div class="footer-links">
+            <p>Not ready?</p>
+            <a href="https://workshop.founderathlete.co/" target="_blank">Check out our live workshops</a>
+            <a href="https://bookclub.founderathlete.co/" target="_blank">Join Builder Book Club</a>
+        </div>
+    </div>
+
+    <!-- FOOTER: COPYRIGHT -->
+    <div style="background-color: #0a0a0a; color: #666; text-align: center; padding: 40px 20px; font-size: 14px; border-top: 1px solid #1a1a1a;">
+        <p>© 2026 Founder Athlete Inc. All Rights Reserved.</p>
+    </div>
+
+    <!-- Application Form Modal -->
+    <div id="application-modal" class="modal-overlay" style="display: none;">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <div data-fillout-id="avBEJWEEZ7us" data-fillout-embed-type="fullscreen" style="width:100%;height:100%;" data-fillout-inherit-parameters></div>
+    </div>
+    <script src="https://server.fillout.com/embed/v1/"></script>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll reveal animations
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            revealElements.forEach(el => observer.observe(el));
+
+            // CTA button click handlers
+            const ctaButtons = document.querySelectorAll('.cta-button');
+            ctaButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal();
+                });
+            });
+        });
+
+        function openModal() {
+            document.getElementById('application-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('application-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
